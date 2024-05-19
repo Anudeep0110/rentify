@@ -9,6 +9,3 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use(cors())
 
-app.listen(8888,() => {
-    console.log("Listening on PORT 8888");
-})
