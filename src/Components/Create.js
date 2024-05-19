@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const PropertyForm = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +14,8 @@ const PropertyForm = () => {
     money: '',
     name: ''
   });
+
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,6 +39,7 @@ const PropertyForm = () => {
           money: '',
           name: ''
         });
+        navigate('/seller')
       })
       .catch(error => {
         console.error('There was an error adding the property!', error);
