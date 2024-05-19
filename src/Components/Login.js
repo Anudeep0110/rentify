@@ -1,6 +1,24 @@
 import React from 'react'
+import axios from 'axios';
+import { useNavigate,useLocation } from 'react-router-dom';
+
 
 const Login = () => {
+  const [uname,setUname] = React.useState('')
+  const [pwd,setPwd] = React.useState('')
+  const navigate = useNavigate()
+  const login = (e) => {
+    e.preventDefault()
+    axios.post('http://localhost:8000/login', {uname:uname, pwd:pwd})
+    .then(res => {
+      console.log(res.data)
+      if(res.data){
+        navigate('/properties')
+      }else{
+        navigate('/')
+      }
+    })
+  }
   return (
     <div className='flex flex-col gap-5 justify-center items-center min-h-screen bg-slate-100'>
         <div class=" flex flex-col items-center justify-center bg-indigo-100 w-2/6 h-5/6">
@@ -23,6 +41,7 @@ const Login = () => {
                       text-gray-700
                       focus:outline-none
                     "
+                    onChange={(e) => {setUname(e.target.value)}}
                   />
                 </div>
               </div>
@@ -40,6 +59,7 @@ const Login = () => {
                       text-gray-700
                       focus:outline-none
                     "
+                    onChange={(e) => setPwd(e.target.value)}
                   />
                 </div>
               </div>
@@ -54,6 +74,7 @@ const Login = () => {
                   text-gray-100
                   focus:outline-none
                 "
+                onClick={(e) => {login(e)}}
               >
                 Login
               </button>

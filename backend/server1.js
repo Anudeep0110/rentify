@@ -9,5 +9,20 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use(cors())
 
-module.exports = app
+app.post('/login',(req,res) => {
+    console.log(req.body);
+    col_properties.find({})
+    .then(res2 => {
+        console.log(res2);
+        if(res2.length != 0){
+            res.json(true)
+        }else{
+            res.json(false)
+        }
+    })
+    .catch(err => {
+        console.log(err);
+    })
 
+}) 
+module.exports = app 
