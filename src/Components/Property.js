@@ -26,7 +26,7 @@ const Property = () => {
         <main className="container mx-auto px-4 py-8">
         <section className="mb-8">
           <div className="grid grid-cols-1 md:grid-cols-1 ">
-            <img src={`/${data.img}.jpg`} alt="Main Property" className="w-full h-[400px] object-contain rounded" />
+            <img src={`/property1.jpg`} alt="Main Property" className="w-full h-[400px] object-contain rounded" />
             <p className='text-4xl uppercase font-bold text-center'>{data.name}</p>
           </div>
         </section>

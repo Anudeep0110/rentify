@@ -29,12 +29,6 @@ const Login = () => {
     }
     else{
       alert("Your password doesnot match with confirm Password field")
-      setFname('')
-      setLname('')
-      setEmail('')
-      setPhone('')
-      setPwd('')
-      setCfpwd('')
     }
   }
   return (
