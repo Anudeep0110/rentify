@@ -12,8 +12,12 @@ const Login = () => {
     axios.post('http://localhost:8000/login', {uname:uname, pwd:pwd})
     .then(res => {
       console.log(res.data)
-      if(res.data){
-        navigate('/properties')
+      if(res.data.valid){
+        if(res.data.role == 'buyer'){
+          navigate('/properties')
+        }else{
+          navigate('/seller')
+        }
       }else{
         navigate('/')
       }

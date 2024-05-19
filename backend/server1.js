@@ -9,20 +9,43 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use(cors())
 
+app.post('/signup',(req,res) => {
+    console.log(req.body)
+    col_users.insertMany({
+        firstname:req.body.fname,
+        lastname:req.body.lname,
+        email:req.body.email,
+        mobile:req.body.phone, 
+        role:req.body.role,
+        password:req.body.pwd
+    }).then((res1) => {
+        if(res1.length != 0){
+            res.send({valid:true})
+        }  
+        else{
+            res.send({valid:false})
+        } 
+    })
+}) 
+
 app.post('/login',(req,res) => {
     console.log(req.body);
-    col_users.find({email: req.body.uname,password: req.body.pwd})
+    col_users.find({
+        email: req.body.uname,
+        password: req.body.pwd
+    })
     .then(res2 => {
         console.log(res2);
-        if(res2.length !== 0){
-            res.json(true)
+        if(res2.length != 0){
+            res.send({role:res2.role,valid:true})
         }else{
-            res.json(false)
+            res.send({role:"invalid",valid:false})
         }
     })
     .catch(err => {
         console.log(err);
     })
+})
 
-}) 
+
 module.exports = app 
