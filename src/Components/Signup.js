@@ -1,6 +1,42 @@
+import axios from 'axios'
 import React from 'react'
+import { useNavigate,useLocation } from 'react-router-dom';
+
 
 const Login = () => {
+  const navigate = useNavigate()
+  const [fname,setFname] = React.useState('')
+  const [lname,setLname] = React.useState('')
+  const [email,setEmail] = React.useState('')
+  const [phone,setPhone] = React.useState('')
+  const [pwd,setPwd] = React.useState('')
+  const [cfpwd,setCfpwd] = React.useState('')
+  const [role,setRole] = React.useState('')
+
+
+  const Signup = (e) => {
+    e.preventDefault();
+    if(pwd == cfpwd){
+      axios.post('http://localhost:8000/signup',{fname:fname, lname:lname,email:email,phone:phone,pwd:pwd,role:role})
+      .then(res => {
+        console.log(res.data)
+        if(res.data.valid){
+          navigate('/login')
+        }else{
+          navigate('/')
+        }
+      })
+    }
+    else{
+      alert("Your password doesnot match with confirm Password field")
+      setFname('')
+      setLname('')
+      setEmail('')
+      setPhone('')
+      setPwd('')
+      setCfpwd('')
+    }
+  }
   return (
     <div className='flex flex-col gap-4 justify-center items-center min-h-screen bg-slate-100'>
         <div class=" flex flex-col items-center justify-center bg-indigo-100 w-2/6 h-5/6">
@@ -23,6 +59,8 @@ const Login = () => {
                       text-gray-700
                       focus:outline-none
                     "
+                    onChange={(e) => {setFname(e.target.value)}}
+
                   />
                 </div>
               </div>
@@ -40,6 +78,8 @@ const Login = () => {
                       text-gray-700
                       focus:outline-none
                     "
+                    onChange={(e) => {setLname(e.target.value)}}
+
                   />
                 </div>
               </div>
@@ -57,6 +97,8 @@ const Login = () => {
                       text-gray-700
                       focus:outline-none
                     "
+                    onChange={(e) => {setEmail(e.target.value)}}
+
                   />
                 </div>
               </div>
@@ -74,7 +116,17 @@ const Login = () => {
                       text-gray-700
                       focus:outline-none
                     "
+                    onChange={(e) => {setPhone(e.target.value)}}
+
                   />
+                </div>
+              </div>
+              <div class="w-full mb-2">
+                <div class="flex items-center">
+                <select class="w-full border rounded px-3 py-2 text-gray-700 focus:outline-none" onChange = {(e) => {setRole(e.target.value)}}>
+                  <option value={'seller'}>Seller</option>
+                  <option value={'buyer'}>Buyer</option>
+                </select> 
                 </div>
               </div>
               <div class="w-full mb-2">
@@ -91,6 +143,8 @@ const Login = () => {
                       text-gray-700
                       focus:outline-none
                     "
+                    onChange={(e) => {setPwd(e.target.value)}}
+
                   />
                 </div>
               </div>
@@ -108,6 +162,7 @@ const Login = () => {
                       text-gray-700
                       focus:outline-none
                     "
+                    onChange={(e) => {setCfpwd(e.target.value)}}
                   />
                 </div>
               </div>
@@ -122,6 +177,8 @@ const Login = () => {
                   text-gray-100
                   focus:outline-none
                 "
+                onClick={(e) => {Signup(e)}}
+
               >
                 SignUp
               </button>
