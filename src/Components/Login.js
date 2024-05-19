@@ -14,15 +14,21 @@ const Login = () => {
       console.log(res.data)
       if(res.data.valid){
         if(res.data.role == 'buyer'){
+          localStorage.setItem('userRole', res.data.role);
           navigate('/properties')
         }else{
           navigate('/seller')
         }
       }else{
+        alert("Invalid Login Credentials")
         navigate('/')
       }
     })
-  }
+    .catch(err => {
+      console.error('Login error:', err);
+      alert('An error occurred during login');
+    });
+  } 
   return (
     <div className='flex flex-col gap-5 justify-center items-center min-h-screen bg-slate-100'>
         <div class=" flex flex-col items-center justify-center bg-indigo-100 w-2/6 h-5/6">
