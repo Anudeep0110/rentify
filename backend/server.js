@@ -10,6 +10,7 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use(cors())
 app.use('/', server2);
+app.use('/',server1);
 
 
 app.listen(8000, () => {
