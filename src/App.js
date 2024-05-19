@@ -3,6 +3,8 @@ import { BrowserRouter , Routes, Route } from 'react-router-dom';
 import HomeComp from './Components/HomeComp';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
+import AvailableProperties from './Components/AvailableProperties';
+import Property from './Components/Property';
 
 function App() {
   return (
@@ -11,6 +13,8 @@ function App() {
         <Route path='/' element={<HomeComp />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
+        <Route path='/properties' element={<AvailableProperties />} />
+        <Route path='/property' element={<Property />} />
       </Routes>
     </BrowserRouter>
   );
