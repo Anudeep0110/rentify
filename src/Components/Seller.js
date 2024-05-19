@@ -84,7 +84,7 @@ const AvailableProperties = () => {
     const navigate = useNavigate()
 
     const deleteData = (id) => {
-        axios.post('/delete',{id: id})
+        axios.post('http://localhost:8000/delete',{id: id})
         .then(res =>{
             if(res.data === 'deleted'){
                 let newProperties = properties.filter(property => property._id !== id)
@@ -130,7 +130,7 @@ const AvailableProperties = () => {
                 colleges: property.colleges,
                 money: property.money,
                 name: property.name,
-                edit:<button className='bg-blue-500 p-2 text-white rounded-sm' onClick={() => navigate('/property/'+property._id)}>Edit</button>,
+                edit:<button className='bg-blue-500 p-2 text-white rounded-sm' onClick={() => navigate('/edit/'+property._id)}>Edit</button>,
                 delete:<MdOutlineDeleteOutline className='text-2xl' onClick={() => deleteData(property._id)}/>
               })
             })

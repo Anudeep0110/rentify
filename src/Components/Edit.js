@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useParams } from 'react-router-dom';
 
 const PropertyForm = () => {
+
+    const {id} = useParams()
   const [formData, setFormData] = useState({
     owner: '',
     place: '',
@@ -15,6 +17,17 @@ const PropertyForm = () => {
     name: ''
   });
 
+  React.useEffect(() => {
+    axios.post('http://localhost:8000/getproperty',{id: id})
+    .then(res =>{
+        delete res.data.property[0]._id
+        setFormData(res.data.property[0])
+    })
+    .catch(err =>{
+        console.log(err)
+    })
+    },[])
+
   const navigate = useNavigate()
 
   const handleChange = (e) => {
@@ -24,7 +37,8 @@ const PropertyForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:8000/addproperties', formData)
+    console.log('Calling');
+    axios.post('http://localhost:8000/editproperty', {id:id,formData: formData})
       .then(response => {
         console.log('Property added:', response.data);
         // Reset form after successful submission
@@ -49,10 +63,10 @@ const PropertyForm = () => {
   return (
     <div className='flex flex-col gap-4 justify-center items-center min-h-screen bg-slate-100'>
       <div className="flex flex-col items-center justify-center bg-indigo-100 w-2/6 h-5/6">
-        <form className="w-full rounded-lg" onSubmit={handleSubmit}>
+        <form className="w-full rounded-lg">
           <div className="flex font-bold justify-center mt-6">
           </div>
-          <h2 className="text-2xl text-center uppercase font-semibold text-gray-900 mb-8">Create Property</h2>
+          <h2 className="text-2xl text-center uppercase font-semibold text-gray-900 mb-8">Edit Property</h2>
           <div className="px-12 pb-10">
             {Object.keys(formData).map((key) => (
               <div className="w-full mb-2" key={key}>
@@ -78,6 +92,7 @@ const PropertyForm = () => {
             ))}
             <button
               type="submit"
+              onClick={handleSubmit}
               className="
                 w-full
                 py-2

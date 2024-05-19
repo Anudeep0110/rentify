@@ -85,4 +85,35 @@ app.post('/addproperties',(req,res) =>{
     })
 })
 
+app.post('/editproperty',(req,res) =>{
+    const id = req.body.id;
+    const owner = req.body.formData.owner;
+    const place = req.body.formData.place;
+    const area = req.body.formData.area;
+    const nob = req.body.formData.nob;
+    const bathroom = req.body.formData.bathroom;
+    const hospitals = req.body.formData.hospitals;
+    const colleges = req.body.formData.colleges;
+    const money = req.body.formData.money;
+    const name = req.body.formData.name;
+
+    col_properties.updateOne({_id: id},{
+        owner: owner,
+        place: place,
+        area: area,
+        nob: nob,
+        bathroom: bathroom,
+        hospitals: hospitals,
+        colleges: colleges,
+        money: money,
+        name: name
+    })
+    .then(() =>{
+        res.send('Property Updated')
+    })
+    .catch(err =>{
+        console.log(err);
+    })
+})
+
 module.exports = app

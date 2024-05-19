@@ -7,6 +7,7 @@ import Signup from './Components/Signup';
 import AvailableProperties from './Components/AvailableProperties';
 import Property from './Components/Property';
 import Seller from './Components/Seller';
+import Edit from './Components/Edit';
 import Create from './Components/Create';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path='/signup' element={<Signup />} />
         <Route path='/properties' element={<AvailableProperties />} />
         <Route path='/property/:id' element={<Property />} />
+        <Route path='/edit/:id' element={<Edit />} />
         <Route path='/seller' element={<Seller />} />
         <Route path='/create' element={<Create />} />
         
