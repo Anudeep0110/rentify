@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter , Routes, Route } from 'react-router-dom';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';  
 import HomeComp from './Components/HomeComp';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
@@ -14,7 +15,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/properties' element={<AvailableProperties />} />
-        <Route path='/property' element={<Property />} />
+        <Route path='/property/:id' element={<Property />} />
       </Routes>
     </BrowserRouter>
   );

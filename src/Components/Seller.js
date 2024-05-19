@@ -65,11 +65,17 @@ const AvailableProperties = () => {
           width: 200
         },
         {
-          label: 'Action',
-          field: 'action',
+          label: 'Edit',
+          field: 'Edit',
           sort: 'asc',
           width: 200
         },
+        {
+            label: 'Delete',
+            field: 'delete',
+            sort: 'asc',
+            width: 200
+          },
       ],
       rows: []
     });
@@ -92,7 +98,8 @@ const AvailableProperties = () => {
                 colleges: property.colleges,
                 money: property.money,
                 name: property.name,
-                action:<button className='bg-blue-500 p-2 text-white rounded-sm' onClick={() => navigate('/property/'+property._id)}>I am Interested</button>
+                edit:<button className='bg-blue-500 p-2 text-white rounded-sm' onClick={() => navigate('/property/'+property._id)}>Edit</button>,
+
               })
             })
             setTabledata({...tabledata,rows: rows})
