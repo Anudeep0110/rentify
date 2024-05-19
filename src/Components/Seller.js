@@ -142,10 +142,10 @@ const AvailableProperties = () => {
     <div className='min-h-screen flex flex-col bg-slate-100'>
         <NavbarComp />
         <div className='h-full flex flex-col w-full '>
-        <div className='w-full py-16 flex justify-between px-48'>
+        {localStorage.getItem('userRole') === 'seller' && <div className='w-full py-16 flex justify-between px-48'>
           <p className='text-3xl'>Create a New Property by clicking on the button. ---------{`>`} </p>
           <button className='bg-blue-500 p-2 px-5 font-semibold uppercase text-white rounded-sm' onClick={() => navigate('/create')}>Create</button>
-        </div>
+        </div>}
           <Table data={tabledata} />
         </div>
     </div>

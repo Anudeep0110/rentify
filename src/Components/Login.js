@@ -13,8 +13,8 @@ const Login = () => {
     .then(res => {
       console.log(res.data)
       if(res.data.valid){
-        if(res.data.role == 'buyer'){
-          localStorage.setItem('userRole', res.data.role);
+        localStorage.setItem('userRole', res.data.role);
+        if(res.data.role === 'buyer'){
           navigate('/properties')
         }else{
           navigate('/seller')
