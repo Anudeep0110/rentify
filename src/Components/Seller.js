@@ -3,6 +3,7 @@ import NavbarComp from './NavbarComp'
 import axios from 'axios'
 import { MDBDataTable } from 'mdbreact';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { MdOutlineDeleteOutline } from "react-icons/md";
 
 
 const AvailableProperties = () => {
@@ -66,7 +67,7 @@ const AvailableProperties = () => {
         },
         {
           label: 'Edit',
-          field: 'Edit',
+          field: 'edit',
           sort: 'asc',
           width: 200
         },
@@ -81,6 +82,37 @@ const AvailableProperties = () => {
     });
     
     const navigate = useNavigate()
+
+    const deleteData = (id) => {
+        axios.post('/delete',{id: id})
+        .then(res =>{
+            if(res.data === 'deleted'){
+                let newProperties = properties.filter(property => property._id !== id)
+                setProperties(newProperties)
+                let rows = []
+                newProperties.map((property,index) => {
+                    rows.push({
+                        owner: property.owner,
+                        place: property.place,
+                        area: property.area,
+                        nob: property.nob,
+                        bathroom: property.bathroom,
+                        hospitals: property.hospitals,
+                        colleges: property.colleges,
+                        money: property.money,
+                        name: property.name,
+                        edit:<button className='bg-blue-500 p-2 text-white rounded-sm' onClick={() => navigate('/edit/'+property._id)}>Edit</button>,
+                        delete:<MdOutlineDeleteOutline onClick={() => deleteData(property._id)}/>
+                    })
+                })
+                setTabledata({...tabledata,rows: rows})
+            }
+        })
+        .catch(err =>{
+            console.log(err)
+        })
+    }
+    
 
     React.useEffect(() =>{
         axios.post('http://localhost:8000/properties',{owner: 'alice@gmail.com'})
@@ -99,7 +131,7 @@ const AvailableProperties = () => {
                 money: property.money,
                 name: property.name,
                 edit:<button className='bg-blue-500 p-2 text-white rounded-sm' onClick={() => navigate('/property/'+property._id)}>Edit</button>,
-
+                delete:<MdOutlineDeleteOutline className='text-2xl' onClick={() => deleteData(property._id)}/>
               })
             })
             setTabledata({...tabledata,rows: rows})

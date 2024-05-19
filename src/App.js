@@ -6,6 +6,8 @@ import Login from './Components/Login';
 import Signup from './Components/Signup';
 import AvailableProperties from './Components/AvailableProperties';
 import Property from './Components/Property';
+import Seller from './Components/Seller';
+import Create from './Components/Create';
 
 function App() {
   return (
@@ -16,6 +18,9 @@ function App() {
         <Route path='/signup' element={<Signup />} />
         <Route path='/properties' element={<AvailableProperties />} />
         <Route path='/property/:id' element={<Property />} />
+        <Route path='/seller' element={<Seller />} />
+        <Route path='/create' element={<Create />} />
+        
       </Routes>
     </BrowserRouter>
   );

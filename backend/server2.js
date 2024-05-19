@@ -41,4 +41,48 @@ app.post('/getproperty',(req,res) =>{
     })   
 })
 
+
+app.post('/delete',(req,res) =>{
+    const id = req.body.id;
+    col_properties.deleteOne({_id: id})
+    .then(() =>{
+        res.send('deleted')
+    })
+    .catch(err =>{
+        console.log(err);
+    })
+})
+
+app.post('/addproperties',(req,res) =>{
+    const owner = req.body.owner;
+    const place = req.body.place;
+    const area = req.body.area;
+    const nob = req.body.nob;
+    const bathroom = req.body.bathroom;
+    const hospitals = req.body.hospitals;
+    const colleges = req.body.colleges;
+    const money = req.body.money;
+    const name = req.body.name;
+
+    const property = new col_properties({
+        owner: owner,
+        place: place,
+        area: area,
+        nob: nob,
+        bathroom: bathroom,
+        hospitals: hospitals,
+        colleges: colleges,
+        money: money,
+        name: name
+    });
+
+    property.save()
+    .then(() =>{
+        res.send('Property Added')
+    })
+    .catch(err =>{
+        console.log(err);
+    })
+})
+
 module.exports = app

@@ -11,10 +11,10 @@ app.use(cors())
 
 app.post('/login',(req,res) => {
     console.log(req.body);
-    col_properties.find({})
+    col_users.find({email: req.body.uname,password: req.body.pwd})
     .then(res2 => {
         console.log(res2);
-        if(res2.length != 0){
+        if(res2.length !== 0){
             res.json(true)
         }else{
             res.json(false)
