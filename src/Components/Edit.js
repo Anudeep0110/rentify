@@ -60,7 +60,7 @@ const PropertyForm = () => {
       });
   };
 
-  if(!localStorage.getItem('userRole')) navigate('/login')
+  if(!localStorage.getItem('userRole') && localStorage.getItem('userRole') === 'seller') navigate('/login')
 
   return (
     <div className='flex flex-col gap-4 justify-center items-center min-h-screen bg-slate-100'>

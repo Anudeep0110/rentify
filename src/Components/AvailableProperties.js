@@ -99,7 +99,7 @@ const AvailableProperties = () => {
         })
     },[])
 
-    if(!localStorage.getItem('userRole')) navigate('/login')
+    if(!localStorage.getItem('userRole') && localStorage.getItem('userRole') === 'buyer') navigate('/login')
 
   return (
     <div className='min-h-screen flex flex-col bg-slate-100'>
