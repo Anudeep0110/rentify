@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const PropertyForm = () => {
+
+
   const [formData, setFormData] = useState({
     owner: '',
     place: '',
@@ -45,6 +47,8 @@ const PropertyForm = () => {
         console.error('There was an error adding the property!', error);
       });
   };
+
+  if(!localStorage.getItem('userRole')) navigate('/login')
 
   return (
     <div className='flex flex-col gap-4 justify-center items-center min-h-screen bg-slate-100'>

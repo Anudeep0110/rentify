@@ -99,6 +99,8 @@ const AvailableProperties = () => {
         })
     },[])
 
+    if(!localStorage.getItem('userRole')) navigate('/login')
+
   return (
     <div className='min-h-screen flex flex-col bg-slate-100'>
         <NavbarComp />

@@ -2,7 +2,7 @@ import React from 'react'
 import NavbarComp from './NavbarComp'
 import axios from 'axios'
 import { MDBDataTable } from 'mdbreact';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { MdOutlineDeleteOutline } from "react-icons/md";
 
 
@@ -137,6 +137,8 @@ const AvailableProperties = () => {
             setTabledata({...tabledata,rows: rows})
         })
     },[])
+
+  if(!localStorage.getItem('userRole')) navigate('/login')
 
   return (
     <div className='min-h-screen flex flex-col bg-slate-100'>

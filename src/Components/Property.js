@@ -1,6 +1,6 @@
 import React from 'react'
 import NavbarComp from './NavbarComp'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 
 const Property = () => {
@@ -19,6 +19,10 @@ const Property = () => {
       console.log(err)
     })
   },[])
+
+  const navigate = useNavigate()
+  if(!localStorage.getItem('userRole')) navigate('/login')
+
   return (
     <div className='min-h-screen bg-slate-100 flex flex-col'>
         <NavbarComp />

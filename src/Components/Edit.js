@@ -60,6 +60,8 @@ const PropertyForm = () => {
       });
   };
 
+  if(!localStorage.getItem('userRole')) navigate('/login')
+
   return (
     <div className='flex flex-col gap-4 justify-center items-center min-h-screen bg-slate-100'>
       <div className="flex flex-col items-center justify-center bg-indigo-100 w-2/6 h-5/6">
