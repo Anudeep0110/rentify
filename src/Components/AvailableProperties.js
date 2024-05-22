@@ -3,6 +3,7 @@ import NavbarComp from './NavbarComp'
 import axios from 'axios'
 import { MDBDataTable } from 'mdbreact';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { FcLike } from "react-icons/fc";
 
 
 const AvailableProperties = () => {
@@ -65,6 +66,18 @@ const AvailableProperties = () => {
           width: 200
         },
         {
+          label: 'Likes',
+          field: 'likes',
+          sort: 'asc',
+          width: 200
+        },
+        {
+          label: 'Like It',
+          field: 'like',
+          sort: 'asc',
+          width: 200
+        },
+        {
           label: 'Action',
           field: 'action',
           sort: 'asc',
@@ -76,10 +89,16 @@ const AvailableProperties = () => {
     
     const navigate = useNavigate()
 
-    React.useEffect(() =>{
-        axios.post('http://localhost:8000/properties',{owner: 'alice@gmail.com'})
-        .then(res =>{
-            setProperties(res.data)
+    React.useEffect(() => {
+      if (!localStorage.getItem('userRole') || localStorage.getItem('userRole') !== 'buyer') {
+          navigate('/login');
+      }
+  }, [navigate]);
+
+  const likeit = (id) => {
+    axios.post('http://localhost:8000/like',{id: id,mail:localStorage.getItem('userMail')})
+    .then(res =>{
+      setProperties(res.data)
             let rows = []
             res.data.map((property,index) =>{
               rows.push({
@@ -92,14 +111,47 @@ const AvailableProperties = () => {
                 colleges: property.colleges,
                 money: property.money,
                 name: property.name,
+                likes:property?.likes,
+                like: <button className='text-2xl p-2 text-white rounded' onClick={() => likeit(property._id)}><FcLike /></button>,
                 action:<button className='bg-blue-500 p-2 text-white rounded-sm' onClick={() => navigate('/property/'+property._id)}>I am Interested</button>
               })
             })
             setTabledata({...tabledata,rows: rows})
-        })
-    },[])
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+  }
 
-    if(!localStorage.getItem('userRole') && localStorage.getItem('userRole') === 'buyer') navigate('/login')
+
+  React.useEffect(() =>{
+    axios.post('http://localhost:8000/properties',{})
+    .then(res =>{
+        setProperties(res.data)
+        let rows = []
+        res.data.map((property,index) =>{
+          rows.push({
+            owner: property.owner,
+            place: property.place,
+            area: property.area,
+            nob: property.nob,
+            bathroom: property.bathroom,
+            hospitals: property.hospitals,
+            colleges: property.colleges,
+            money: property.money,
+            name: property.name,
+            likes:property?.likes,
+            like: <button className='text-2xl p-2 text-white rounded' onClick={() => likeit(property._id)}><FcLike /></button>,
+            action:<button className='bg-blue-500 p-2 text-white rounded-sm' onClick={() => navigate('/property/'+property._id)}>I am Interested</button>
+          })
+        })
+        setTabledata({...tabledata,rows: rows})
+    })
+},[])
+
+  
+    
+   
 
   return (
     <div className='min-h-screen flex flex-col bg-slate-100'>

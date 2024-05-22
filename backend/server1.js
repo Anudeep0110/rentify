@@ -37,7 +37,7 @@ app.post('/login',(req,res) => {
     .then(res2 => {
         console.log(res2);
         if(res2.length !== 0){
-            res.send({role:res2[0].role,valid:true})
+            res.send({role:res2[0].role,mail:res2[0].email,valid:true})
         }else{
             res.send({role:"invalid",valid:false})
         }

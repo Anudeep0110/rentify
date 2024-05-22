@@ -34,7 +34,7 @@ const Login = () => {
   return (
     <div className='flex flex-col gap-4 justify-center items-center min-h-screen bg-slate-100'>
         <div class=" flex flex-col items-center justify-center bg-indigo-100 w-2/6 h-5/6">
-          <form class="w-full rounded-lg">
+          <form class="w-full rounded-lg" onSubmit={Signup}>
             <div class="flex font-bold justify-center mt-6">
             </div>
             <h2 class="text-2xl text-center uppercase font-semibold text-gray-900 mb-8">SignUp Here</h2>
@@ -44,6 +44,7 @@ const Login = () => {
                   <input
                     type="text"
                     placeholder="First Name"
+                    required
                     class="
                       w-full
                       border
@@ -63,6 +64,7 @@ const Login = () => {
                   <input
                     type="text"
                     placeholder="Last Name"
+                    required
                     class="
                       w-full
                       border
@@ -80,8 +82,9 @@ const Login = () => {
               <div class="w-full mb-2">
                 <div class="flex items-center">
                   <input
-                    type="text"
+                    type="email"
                     placeholder="Email Address"
+                    required
                     class="
                       w-full
                       border
@@ -101,6 +104,7 @@ const Login = () => {
                   <input
                     type="text"
                     placeholder="Phone Number"
+                    required
                     class="
                       w-full
                       border
@@ -117,7 +121,7 @@ const Login = () => {
               </div>
               <div class="w-full mb-2">
                 <div class="flex items-center">
-                <select class="w-full border rounded px-3 py-2 text-gray-700 focus:outline-none" onChange = {(e) => {setRole(e.target.value)}}>
+                <select required class="w-full border rounded px-3 py-2 text-gray-700 focus:outline-none" onChange = {(e) => {setRole(e.target.value)}}>
                   <option value={'seller'}>Seller</option>
                   <option value={'buyer'}>Buyer</option>
                 </select> 
@@ -128,6 +132,7 @@ const Login = () => {
                   <input
                     type="password"
                     placeholder="Password"
+                    required
                     class="
                       w-full
                       border
@@ -147,6 +152,7 @@ const Login = () => {
                   <input
                     type="password"
                     placeholder="Confirm Password"
+                    required
                     class="
                       w-full
                       border
@@ -171,8 +177,6 @@ const Login = () => {
                   text-gray-100
                   focus:outline-none
                 "
-                onClick={(e) => {Signup(e)}}
-
               >
                 SignUp
               </button>

@@ -14,6 +14,7 @@ const Login = () => {
       console.log(res.data)
       if(res.data.valid){
         localStorage.setItem('userRole', res.data.role);
+        localStorage.setItem('userMail', res.data.mail)
         if(res.data.role === 'buyer'){
           navigate('/properties')
         }else{

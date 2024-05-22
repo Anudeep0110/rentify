@@ -115,7 +115,7 @@ const AvailableProperties = () => {
     
 
     React.useEffect(() =>{
-        axios.post('http://localhost:8000/properties',{owner: 'alice@gmail.com'})
+        axios.post('http://localhost:8000/properties',{owner: localStorage.getItem('userMail')})
         .then(res =>{
             setProperties(res.data)
             let rows = []
@@ -138,7 +138,7 @@ const AvailableProperties = () => {
         })
     },[])
 
-  if(!localStorage.getItem('userRole') && localStorage.getItem('userRole') === 'seller') navigate('/login')
+  if(!localStorage.getItem('userRole') || localStorage.getItem('userRole') !== 'seller') navigate('/login')
 
   return (
     <div className='min-h-screen flex flex-col bg-slate-100'>

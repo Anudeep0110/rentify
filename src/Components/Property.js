@@ -9,7 +9,7 @@ const Property = () => {
   const [data,setData] = React.useState({})
   const [user,setUser] = React.useState({})
   React.useEffect(() => {
-    axios.post('http://localhost:8000/getproperty',{id:id})
+    axios.post('http://localhost:8000/getproperty',{id:id,mail:sessionStorage.getItem('userMail')})
     .then(res =>{
       console.log(res.data)
       setData(res.data.property[0])
@@ -18,7 +18,7 @@ const Property = () => {
     .catch(err =>{
       console.log(err)
     })
-  },[])
+  },[id])
 
   const navigate = useNavigate()
   if(!localStorage.getItem('userRole')) navigate('/login')
