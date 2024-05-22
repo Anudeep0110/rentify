@@ -122,6 +122,7 @@ const Login = () => {
               <div class="w-full mb-2">
                 <div class="flex items-center">
                 <select required class="w-full border rounded px-3 py-2 text-gray-700 focus:outline-none" onChange = {(e) => {setRole(e.target.value)}}>
+                <option value={'NA'}>Select one option</option>
                   <option value={'seller'}>Seller</option>
                   <option value={'buyer'}>Buyer</option>
                 </select> 
